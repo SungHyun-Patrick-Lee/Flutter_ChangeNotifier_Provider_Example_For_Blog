@@ -1,12 +1,15 @@
-import 'package:flutter_provider_example_for_blog/core/models/number_trivia.dart';
+import 'package:dartz/dartz.dart';
+
+import '../err/failure.dart';
+import '../models/number_trivia.dart';
 
 abstract class NumberTriviaService {
-  Future<NumberTrivia> getRandomNumberTrivia();
+  Future<Either<Failure, NumberTrivia>> getRandomNumberTrivia();
 }
 
 class NumberTriviaServiceImpl extends NumberTriviaService {
   @override
-  Future<NumberTrivia> getRandomNumberTrivia() {
+  Future<Either<Failure, NumberTrivia>> getRandomNumberTrivia() {
     throw UnimplementedError();
   }
 }

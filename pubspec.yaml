@@ -37,6 +37,9 @@ dependencies:
   # http connection
   http: ^0.12.2
 
+  # equatable
+  equatable: ^1.2.4
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

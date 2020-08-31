@@ -11,6 +11,14 @@ class NumberTriviaModel extends BaseModel {
   NumberTrivia numberTrivia;
 
   Future getRandomNumberTrivia() async {
-    numberTrivia = await numberTriviaService.getRandomNumberTrivia();
+    final response = await numberTriviaService.getRandomNumberTrivia();
+    response.fold(
+      (failure) {
+        numberTrivia = NumberTrivia(number: -1, text: '네트워크 에러가 발생하였습니다.');
+      },
+      (numberTriviaParam) {
+        numberTrivia = numberTriviaParam;
+      },
+    );
   }
 }

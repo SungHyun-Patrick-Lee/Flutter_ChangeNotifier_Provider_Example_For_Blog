@@ -1,4 +1,6 @@
-class NumberTrivia {
+import 'package:equatable/equatable.dart';
+
+class NumberTrivia extends Equatable {
   String text;
   int number;
 
@@ -8,4 +10,7 @@ class NumberTrivia {
     text = json['text'];
     number = json['number'];
   }
+
+  @override
+  List<Object> get props => [text, number];
 }
