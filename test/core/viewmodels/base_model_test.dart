@@ -10,17 +10,7 @@ void main() {
   });
 
   group('BaseModelTest', () {
-    ViewModelState state;
-    ViewModelState expectState;
-
-    setUp(() {
-      state = ViewModelState.Busy;
-
-      baseModel
-        ..addListener(() {
-          expectState = state;
-        });
-    });
+    ViewModelState state = ViewModelState.Busy;
 
     test('BaseModel에서 setState의 동작 여부 테스트', () {
       // act
@@ -29,7 +19,7 @@ void main() {
 
       // assert
       expect(state, result);
-      expect(state, expectState);
+      expect(state, baseModel.state);
     });
   });
 }

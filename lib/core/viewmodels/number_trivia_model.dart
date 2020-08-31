@@ -1,3 +1,5 @@
+import 'package:flutter_provider_example_for_blog/core/enums/viewmodel_state.dart';
+
 import '../models/number_trivia.dart';
 import '../services/number_trivia_service.dart';
 import 'base_model.dart';
@@ -11,6 +13,8 @@ class NumberTriviaModel extends BaseModel {
   NumberTrivia numberTrivia;
 
   Future getRandomNumberTrivia() async {
+    setState(ViewModelState.Busy);
+
     final response = await numberTriviaService.getRandomNumberTrivia();
     response.fold(
       (failure) {
@@ -20,5 +24,7 @@ class NumberTriviaModel extends BaseModel {
         numberTrivia = numberTriviaParam;
       },
     );
+
+    setState(ViewModelState.Idle);
   }
 }
