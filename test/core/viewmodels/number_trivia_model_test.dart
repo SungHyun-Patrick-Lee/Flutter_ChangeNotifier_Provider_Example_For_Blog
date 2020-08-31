@@ -22,7 +22,9 @@ main() {
         'getRandomNumberTrivia() 가 성공했을떄의 테스트 ',
         () async {
           // arrange
-
+          final testNumberTrivia = NumberTrivia()
+          mockNumberTriviaService.getRandomNumberTrivia()
+            .thenAnswer((_) async => NumberTrivia)
           // act
 
           // assert
