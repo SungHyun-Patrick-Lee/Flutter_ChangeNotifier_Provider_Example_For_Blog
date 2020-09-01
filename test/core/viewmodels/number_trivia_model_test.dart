@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter_provider_example_for_blog/core/enums/viewmodel_state.dart';
 import 'package:flutter_provider_example_for_blog/core/err/failure.dart';
 import 'package:flutter_provider_example_for_blog/core/models/number_trivia.dart';
 import 'package:flutter_provider_example_for_blog/core/services/number_trivia_service.dart';

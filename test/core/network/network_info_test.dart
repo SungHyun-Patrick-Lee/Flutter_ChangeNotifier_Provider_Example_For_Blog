@@ -24,7 +24,7 @@ main() {
         when(connectionChecker.hasConnection)
             .thenAnswer((_) async => testFuture);
         // act
-        final result = await networkInfoImpl.isConnected();
+        final result = await networkInfoImpl.isConnected;
         // assert
         verify(connectionChecker.hasConnection);
         expect(result, testBool);
