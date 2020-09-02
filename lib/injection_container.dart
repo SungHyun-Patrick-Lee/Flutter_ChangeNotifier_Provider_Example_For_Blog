@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 
 GetIt locator = GetIt.instance;
 
-void setUpLocator() async {
+Future<void> setUpLocator() async {
   // !ViewModel
   locator
       .registerFactory(() => NumberTriviaModel(numberTriviaService: locator()));
