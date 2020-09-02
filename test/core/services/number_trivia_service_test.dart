@@ -7,8 +7,6 @@ import 'package:flutter_provider_example_for_blog/core/services/number_trivia_se
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../viewmodels/number_trivia_model_test.dart';
-
 class MockApi extends Mock implements Api {}
 
 class MockNetworkInfo extends Mock implements NetworkInfo {}
@@ -33,6 +31,8 @@ main() {
       () async {
         // arrange
         final testTrivia = NumberTrivia(number: 1, text: 'test');
+
+        when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
         when(mockApi.getRandomNumberTriviaFromServer())
             .thenAnswer((_) async => testTrivia);
         // act

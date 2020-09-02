@@ -19,15 +19,14 @@ main() {
       'isConnected() 가 잘 작동하는지 확인',
       () async {
         // arrange
-        final testBool = true;
-        final testFuture = Future.value(testBool);
-        when(connectionChecker.hasConnection)
-            .thenAnswer((_) async => testFuture);
+        final testFuture = Future.value(true);
+
+        when(connectionChecker.hasConnection).thenAnswer((_) => testFuture);
         // act
-        final result = await networkInfoImpl.isConnected;
+        final result = networkInfoImpl.isConnected;
         // assert
         verify(connectionChecker.hasConnection);
-        expect(result, testBool);
+        expect(result, testFuture);
       },
     );
   });

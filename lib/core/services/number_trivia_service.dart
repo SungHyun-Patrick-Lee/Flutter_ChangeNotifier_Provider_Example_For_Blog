@@ -11,7 +11,7 @@ abstract class NumberTriviaService {
   Future<Either<Failure, NumberTrivia>> getRandomNumberTrivia();
 }
 
-class NumberTriviaServiceImpl {
+class NumberTriviaServiceImpl implements NumberTriviaService {
   final Api api;
   final NetworkInfo networkInfo;
 
