@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:flutter_provider_example_for_blog/core/err/exception.dart';
 import 'package:flutter_provider_example_for_blog/core/err/failure.dart';
 import 'package:flutter_provider_example_for_blog/core/models/number_trivia.dart';
 import 'package:flutter_provider_example_for_blog/core/network/network_info.dart';
@@ -25,35 +26,75 @@ main() {
     );
   });
 
-  group('NumberTriviaService', () {
-    test(
-      'getRandomNumberTrivia() 가 성공했을 때 테스트',
-      () async {
-        // arrange
-        final testTrivia = NumberTrivia(number: 1, text: 'test');
-
+  void online(Function body) {
+    group('Device is Online', () {
+      setUp(() {
         when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
-        when(mockApi.getRandomNumberTriviaFromServer())
-            .thenAnswer((_) async => testTrivia);
-        // act
-        final result = await triviaService.getRandomNumberTrivia();
-        // assert
-        verify(mockApi.getRandomNumberTriviaFromServer());
-        expect(result, Right(testTrivia));
-      },
-    );
+      });
 
-    test(
-      'getRandomNumberTrivia() 에서 Network가 연결되지 않았을때 NetworkFailure반환 테스트',
-      () async {
-        // arrange
+      body();
+    });
+  }
+
+  void offline(Function body) {
+    group('Device is Offline', () {
+      setUp(() {
         when(mockNetworkInfo.isConnected).thenAnswer((_) async => false);
-        // act
-        final result = await triviaService.getRandomNumberTrivia();
-        // assert
-        verify(mockNetworkInfo.isConnected);
-        expect(result, Left(NetworkFailure()));
-      },
-    );
+      });
+
+      body();
+    });
+  }
+
+  group('NumberTriviaService', () {
+    online(() {
+      test(
+        'getRandomNumberTrivia() 가 성공했을 때 테스트',
+        () async {
+          // arrange
+          final testTrivia = NumberTrivia(number: 1, text: 'test');
+
+          when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
+          when(mockApi.getRandomNumberTriviaFromServer())
+              .thenAnswer((_) async => testTrivia);
+          // act
+          final result = await triviaService.getRandomNumberTrivia();
+          // assert
+          verify(mockApi.getRandomNumberTriviaFromServer());
+          expect(result, Right(testTrivia));
+        },
+      );
+    });
+
+    online(() {
+      test(
+        'getRandomNumberTrivia() 가 실패했을 때 ServerFailure 반환',
+        () async {
+          // arrange
+          when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
+          when(mockApi.getRandomNumberTriviaFromServer())
+              .thenThrow(ServerException());
+          // act
+          final result = await triviaService.getRandomNumberTrivia();
+          // assert
+          expect(result, Left(ServerFailure()));
+        },
+      );
+    });
+
+    offline(() {
+      test(
+        'getRandomNumberTrivia() 에서 Network가 연결되지 않았을때 NetworkFailure반환 테스트',
+        () async {
+          // arrange
+          when(mockNetworkInfo.isConnected).thenAnswer((_) async => false);
+          // act
+          final result = await triviaService.getRandomNumberTrivia();
+          // assert
+          verify(mockNetworkInfo.isConnected);
+          expect(result, Left(NetworkFailure()));
+        },
+      );
+    });
   });
 }
