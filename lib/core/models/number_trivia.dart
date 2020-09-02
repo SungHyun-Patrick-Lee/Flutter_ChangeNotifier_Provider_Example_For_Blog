@@ -12,7 +12,7 @@ class NumberTrivia extends Equatable {
 
   NumberTrivia.fromJson(Map<String, dynamic> json) {
     text = json['text'];
-    number = json['number'];
+    number = (json['number'] as num).toInt();
   }
 
   @override
