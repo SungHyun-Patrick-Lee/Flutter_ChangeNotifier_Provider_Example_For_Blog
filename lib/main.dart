@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_provider_example_for_blog/injection_container.dart';
+
+import 'injection_container.dart';
+import 'ui/router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,6 +15,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Provider Example',
+      theme: ThemeData(
+        primaryColor: Colors.blue,
+        accentColor: Colors.blueAccent,
+      ),
+      initialRoute: '/',
+      onGenerateRoute: Router.generateRoute,
     );
   }
 }
