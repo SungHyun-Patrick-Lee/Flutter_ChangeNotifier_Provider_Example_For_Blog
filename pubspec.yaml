@@ -40,6 +40,9 @@ dependencies:
   # equatable
   equatable: ^1.2.4
 
+  # provider
+  provider: ^4.3.2+1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
