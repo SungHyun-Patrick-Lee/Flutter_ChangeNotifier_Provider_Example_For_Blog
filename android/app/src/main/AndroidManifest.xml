@@ -7,7 +7,7 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="flutter_provider_example_for_blog"
+        android:label="ChangeNotifier+Provider Example"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
