@@ -1,3 +1,1 @@
-# flutter_ChangeNotifier+Provider_For_Blog
-
-블로그를 위한 Provider Example
+# flutter_ChangeNotifier+Provider_for_blog
